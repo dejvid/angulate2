@@ -81,8 +81,7 @@ object AngulateRuntime {
 /**
  * This object contains default values defined in the project's SJSX file.
  */
-//@JSExportTopLevel("AngulateRuntimeSJSXConfig")
-@JSExport
+@JSExportTopLevel("AngulateRuntimeSJSXConfig")
 object AngulateRuntimeSJSXConfig {
   @JSExport
   var decorate: js.UndefOr[js.Function2[js.Array[js.Any],js.Any,js.Any]] = js.undefined

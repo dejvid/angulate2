@@ -7,8 +7,8 @@
 //               Distributed under the MIT License (see included LICENSE file)
 package de.surfice.angulate2.sbtplugin
 
+import org.portablescala.sbtplatformdeps.PlatformDepsPlugin.autoImport._
 import org.scalajs.sbtplugin.{ScalaJSPlugin, ScalaJSPluginInternal, Stage}
-import org.scalajs.sbtplugin.impl.DependencyBuilders
 import sbt.Keys._
 import sbt._
 import sjsx.sbtplugin.SJSXPlugin
@@ -66,13 +66,13 @@ object Angulate2Plugin extends sbt.AutoPlugin {
 
     addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
     libraryDependencies ++= Seq("angulate2","angulate2-extensions") map { dep =>
-      DepBuilder.toScalaJSGroupID("de.surfice") %%% dep % Version.angulateVersion
+      "de.surfice" %%% dep % Version.angulateVersion
     }
 //    sjsxSnippets += SJSXSnippet(0,ngPreamble.value),
 //    sjsxSnippets += SJSXSnippet(0,
 //      s"""var s = require('${ngScalaModule.value}');
 //        |
-//        |var config = s.angulate2.ext.rt.AngulateRuntimeSJSXConfig();
+//        |var config = s.angulate2.ext.rt.AngulateRuntimeSJSXConfig;
 //        |config.decorate = __decorate;
 //      """.stripMargin),
 //    sjsxSnippets <++= ((ngPlattform,ngBootstrap,ngEnableProdMode) map boostrap)
@@ -91,7 +91,7 @@ object Angulate2Plugin extends sbt.AutoPlugin {
             SJSXSnippet(0,
               s"""var s = require('${ngScalaModule.value}');
                  |
-                 |var config = s.angulate2.ext.rt.AngulateRuntimeSJSXConfig();
+                 |var config = s.angulate2.ext.rt.AngulateRuntimeSJSXConfig;
                  |config.decorate = __decorate;
                """.stripMargin)
           ))
@@ -108,9 +108,6 @@ object Angulate2Plugin extends sbt.AutoPlugin {
     Seq(SJSXSnippet(2000,script))
   } getOrElse Nil
 
-
-
-  private object DepBuilder extends DependencyBuilders
 
 
 }

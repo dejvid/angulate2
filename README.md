@@ -1,23 +1,33 @@
-angulate2
-===========
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/angulate2/Lobby)
+# angulate2
+<!--[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/angulate2/Lobby)-->
 [![Scala.js](https://www.scala-js.org/assets/badges/scalajs-0.6.17.svg)](https://www.scala-js.org)
 <!--[![Build Status](https://travis-ci.org/jokade/angulate2.svg?branch=master)](https://travis-ci.org/jokade/angulate2)-->
 
 [Scala.js](http://www.scala-js.org/) bindings for [Angular](http://www.angular.io). The goal is to provide an API/ experience very similar to the [TypeScript API](https://angular.io/docs/ts/latest/guide/cheatsheet.html) of Angular.
 
-**IMPORTANT: angulate2 currently only supports Scala 2.11.x**
+**IMPORTANT: angulate2 currently only supports Scala 2.12.x**
 
-A basic [Quickstart Example](https://github.com/jokade/angulate2-quickstart) that may serve as template is available, as well as set of **[extended examples](https://github.com/jokade/angulate2-examples)**.
+<!--A basic [Quickstart Example](https://github.com/jokade/angulate2-quickstart) that may serve as template is available, as well as set of **[extended examples](https://github.com/jokade/angulate2-examples)**.-->
 
-**[Release Notes](https://github.com/jokade/angulate2/wiki/Release-Notes)**
+<!--**[Release Notes](https://github.com/jokade/angulate2/wiki/Release-Notes)**-->
 
-Getting Started
----------------
-### SBT settings
+## Getting Started
+### Preparations
+#### Build prerequisites and publish snapshots to local repository
+[sbt-node](https://github.com/surprof/sbt-node) via `sbt publishLocal`
+
+[sbt-sjsx](https://github.com/surprof/sbt-sjsx) via `sbt publishLocal`
+
+#### Build this project and publish snapshot to local repository
+```
+sbt publishLocal
+```
+
+### Using angulate2
+#### SBT settings
 Add the following lines to your `project/plugins.sbt`:
 ```scala
-addSbtPlugin("de.surfice" % "sbt-angulate2" % "0.1.0-RC1")
+addSbtPlugin("de.surfice" % "sbt-angulate2" % "0.2.0-SNAPSHOT")
 ```
 and this to your `build.sbt`:
 ```scala
@@ -25,9 +35,9 @@ enablePlugins(Angulate2Plugin)
 
 ngBootstrap := Some("AppModule") //qualified name (including packages) of Scala class to bootstrap
 ```
-The current version of angulate2 is built for Angular 4 and Scala.js 0.6.18.
+The current version of angulate2 is built for Angular 6 and Scala.js 0.6.25.
 
-### Create application module and component
+#### Create application module and component
 ```scala
 import angulate2.std._
 import angulate2.platformBrowser.BrowserModule
@@ -48,12 +58,12 @@ class AppComponent {
 }
 ```
 
-### Build and run with System.js
-With the above configuration, a separate JS file `PROJECT-sjsx.js` is written to `target/scala-2.11/` every time you run `fastOptJS` or `fullOptJS`. This file contains the class decorators generated from Angular2 annotations (@Component, ...) and represents the entry module of your Angular application. The annotations file loads the Scala.js package and all Angular libraries via `require`, so you need to load the annotations file with a module loader. 
+#### Build and run with System.js
+With the above configuration, a separate JS file `PROJECT-sjsx.js` is written to `target/scala-2.12/` every time you run `fastOptJS` or `fullOptJS`. This file contains the class decorators generated from Angular2 annotations (@Component, ...) and represents the entry module of your Angular application. The annotations file loads the Scala.js package and all Angular libraries via `require`, so you need to load the annotations file with a module loader. 
 
 One way to achieve this is to use (System.js)[https://github.com/systemjs/systemjs]. The angulate2 sbt plugin provides some tasks to simplify the creation of the System.js configuration, and for running (lite-server)[https://github.com/johnpapa/lite-server]. Although you can build your angulate2 project without Node.js, some of these tasks require a Node.js installation, so make sure `npm` and `node` are in your `PATH` before you proceed.
 
-#### Add the HTML index
+##### Add the HTML index
 Create `src/main/resources/index-fastopt.html` with the following content:
 ```html
 <html>
@@ -81,7 +91,7 @@ Create `src/main/resources/index-fastopt.html` with the following content:
 </html>
 ```
 
-#### Create the System.js configuration 
+##### Create the System.js configuration 
 Most of the settings required for System.js config file are pre-configured by the angulate2 sbt plugin; however, you need to add the following System.js module mappings to your `build.sbt`:
 ```scala
     systemJSMappings in fastOptJS ++= Seq(
@@ -100,19 +110,18 @@ Most of the settings required for System.js config file are pre-configured by th
 
 then run `sbt fastOptJS::systemJS`. This creates the System.js configuration at `target/scala-2.11/systemjs-fastopt.config.js`.
 
-#### Create lite-server configuration
+##### Create lite-server configuration
 Next run `sbt fastOptJS::liteServerWriteConfigFile`. This will install all required npm dependencies (which may take some time), copy your `index-fastopt.html` to `target/scala-2.11/`, and create `bs-config-fastopt.json` (the lite-server configuration).
 
-#### Compile and run project
+##### Compile and run project
 Run `sbt fastOptJS`; this will build the Scala.js application file (`angulate2-quickstart-fastopt.js`) and the corresponding decorator file (`angulate2-quickstart-sjsx.js`). To run you project, start
 ```bash
 $ node_modules/lite-server/bin/lite-server --config=target/scala-2.11/bs-config-fastopt.json
 ```
 from your shell, and point your browser to `http://localhost:3000/index-fastopt.html`.
 
-### Bundle the application with webpack
+#### Bundle the application with webpack
 TBD
 
-License
--------
+## License
 This code is open source software licensed under the [MIT License](http://opensource.org/licenses/MIT).

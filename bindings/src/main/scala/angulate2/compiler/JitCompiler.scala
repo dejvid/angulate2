@@ -7,7 +7,6 @@ package angulate2.compiler
 
 import angulate2.core.{ModuleWithComponentFactories, NgModuleFactory, Type}
 import rxjs.RxPromise
-import sun.security.pkcs11.Secmod.ModuleType
 
 import scala.scalajs.js
 import scala.scalajs.js.annotation.JSImport
