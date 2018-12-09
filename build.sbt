@@ -1,20 +1,20 @@
-version in ThisBuild := "0.1.0-RC3-SNAPSHOT"
+version in ThisBuild := "0.2.0-SNAPSHOT"
 
-scalaVersion in ThisBuild := "2.11.11"
+scalaVersion in ThisBuild := "2.12.8"
 
-crossScalaVersions in ThisBuild := Seq("2.11.11","2.12.2")
+crossScalaVersions in ThisBuild := Seq("2.12.8")
 
 organization in ThisBuild := "de.surfice"
 
 // versions of libraries used by angulate during build
 val Version = new {
-  val sbt_node    = "0.0.5-SNAPSHOT"
-  val smacrotools = "0.0.6"
-  val sjsx        = "0.3.3"
-  val rxjs        = "0.0.6-SNAPSHOT"
-  val scalajsdom  = "0.9.1"
-  val scalatags   = "0.6.2"
-  val slogging    = "0.5.3"
+  val sbt_node    = "0.1.0-SNAPSHOT"
+  val smacrotools = "0.0.8"
+  val sjsx        = "0.4.0-SNAPSHOT"
+  val rxjs        = "0.0.5"
+  val scalajsdom  = "0.9.6"
+  val scalatags   = "0.6.7"
+  val slogging    = "0.6.1"
 }
 
 // NPM packages and versions required during build or runtime
@@ -54,8 +54,8 @@ lazy val commonSettings = Seq(
 lazy val dontPublish = Seq(
     publish := {},
     publishLocal := {},
-    com.typesafe.sbt.pgp.PgpKeys.publishSigned := {},
-    com.typesafe.sbt.pgp.PgpKeys.publishLocalSigned := {},
+//    com.typesafe.sbt.pgp.PgpKeys.publishSigned := {},
+//    com.typesafe.sbt.pgp.PgpKeys.publishLocalSigned := {},
     publishArtifact := false,
     publishTo := Some(Resolver.file("Unused transient repository",file("target/unusedrepo")))
   )
@@ -72,7 +72,7 @@ lazy val bindings = project
   .settings(publishingSettings: _*)
   .settings( 
     name := "angulate2",
-    addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
+    addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.1" cross CrossVersion.full),
     libraryDependencies ++= Seq(
       "org.scala-lang" % "scala-reflect" % scalaVersion.value,
       "org.scala-js"   %%% "scalajs-dom" % Version.scalajsdom,
@@ -96,7 +96,7 @@ lazy val extensions = project
   .settings(publishingSettings: _*)
   .settings( 
     name := "angulate2-extensions",
-    addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
+    addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.1" cross CrossVersion.full),
     libraryDependencies ++= Seq(
       "biz.enef" %%% "slogging" % Version.slogging
       )
@@ -109,8 +109,8 @@ lazy val plugin = project
     name := "sbt-angulate2",
     description := "sbt plugin for angulate2 (Angular2 bindings for Scala.js)",
     sbtPlugin := true,
-    scalaVersion := "2.10.6",
-    crossScalaVersions := Seq("2.10.6"),
+    scalaVersion := "2.12.8",
+    crossScalaVersions := Seq("2.12.8"),
     addSbtPlugin("de.surfice" % "sbt-sjsx" % Version.sjsx),
     sourceGenerators in Compile += Def.task {
       val file = (sourceManaged in Compile).value / "Version.scala"
@@ -136,8 +136,8 @@ lazy val bundling = project
     name := "sbt-angulate2-bundling",
     description := "sbt plugin for angulate2 with bundling support (Angular2 bindings for Scala.js)",
     sbtPlugin := true,
-    scalaVersion := "2.10.6",
-    crossScalaVersions := Seq("2.10.6"),
+    scalaVersion := "2.12.8",
+    crossScalaVersions := Seq("2.12.8"),
     addSbtPlugin("de.surfice" % "sbt-node" % Version.sbt_node)
   )
 
@@ -161,7 +161,7 @@ lazy val libs = project.in(file("target/libsProject"))
 //  enablePlugins(ScalaJSPlugin).
 //  settings(commonSettings: _*).
 //  settings(
-//    addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full),
+//    addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.1" cross CrossVersion.full),
 //    publish := {},
 //    scalacOptions ++= angulateDebugFlags,
 //    scalaJSStage in Test := FastOptStage,

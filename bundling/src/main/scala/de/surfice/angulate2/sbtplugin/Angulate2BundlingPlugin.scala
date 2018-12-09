@@ -116,17 +116,17 @@ object Angulate2BundlingPlugin extends AutoPlugin {
         )
     },
 
-    ngBundle in scoped <<= (ngBundleConfig in scoped,(webpack in scoped).task, (systemJS in scoped).task) apply { (config, webpack, systemJS) =>
-      config.bundleMode match {
+    ngBundle in scoped := { Def.taskDyn[Option[File]] {
+      (ngBundleConfig in scoped).value.bundleMode match {
         case NgBundleMode.Webpack =>
-          webpack.map(Some(_))
+          Def.task { Some((webpack in scoped).task.value) }
         case NgBundleMode.SystemJS =>
-          systemJS.map(f => Some(f.file))
-        case _ => task{
-          None
+          Def.task { Some((systemJS in scoped).task.value.file) }
+        case _ =>
+          Def.task { None }
         }
       }
-    }
+    }.value
   )
 
 
