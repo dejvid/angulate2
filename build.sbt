@@ -11,7 +11,7 @@ val Version = new {
   val sbt_node    = "0.1.0-SNAPSHOT"
   val smacrotools = "0.0.8"
   val sjsx        = "0.4.0-SNAPSHOT"
-  val rxjs        = "0.0.5"
+  val rxjs        = "0.1.0-SNAPSHOT"
   val scalajsdom  = "0.9.6"
   val scalatags   = "0.6.7"
   val slogging    = "0.6.1"
@@ -84,7 +84,7 @@ lazy val bindings = project
     ),
     scalacOptions ++= (if (isSnapshot.value) Seq.empty else Seq({
         val a = baseDirectory.value.toURI.toString.replaceFirst("[^/]+/?$", "")
-        val g = "https://raw.githubusercontent.com/jokade/angulate2"
+        val g = "https://raw.githubusercontent.com/surprof/angulate2"
         s"-P:scalajs:mapSourceURI:$a->$g/v${version.value}/"
       }))
   )
@@ -191,7 +191,7 @@ lazy val publishingSettings = Seq(
       Some("releases"  at nexus + "service/local/staging/deploy/maven2")
   },
   pomExtra := (
-    <url>https://github.com/jokade/angulate2</url>
+    <url>https://github.com/surprof/angulate2</url>
     <licenses>
       <license>
         <name>MIT License</name>
@@ -199,14 +199,14 @@ lazy val publishingSettings = Seq(
       </license>
     </licenses>
     <scm>
-      <url>git@github.com:jokade/angulate2</url>
-      <connection>scm:git:git@github.com:jokade/angulate2.git</connection>
+      <url>git@github.com:surprof/angulate2</url>
+      <connection>scm:git:git@github.com:surprof/angulate2.git</connection>
     </scm>
     <developers>
       <developer>
-        <id>jokade</id>
-        <name>Johannes Kastner</name>
-        <email>jokade@karchedon.de</email>
+        <id>surprof</id>
+        <name>Gabor Suranyi</name>
+        <email>45617562+surprof@users.noreply.github.com</email>
       </developer>
     </developers>
   )

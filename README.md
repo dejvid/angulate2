@@ -18,6 +18,8 @@
 
 [sbt-sjsx](https://github.com/surprof/sbt-sjsx) via `sbt publishLocal`
 
+[scalajs-rxjs](https://github.com/surprof/scalajs-rxjs) via `sbt publishLocal`
+
 #### Build this project and publish snapshot to local repository
 ```
 sbt publishLocal

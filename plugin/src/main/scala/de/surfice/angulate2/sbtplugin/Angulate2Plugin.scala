@@ -72,7 +72,7 @@ object Angulate2Plugin extends sbt.AutoPlugin {
 //    sjsxSnippets += SJSXSnippet(0,
 //      s"""var s = require('${ngScalaModule.value}');
 //        |
-//        |var config = s.angulate2.ext.rt.AngulateRuntimeSJSXConfig;
+//        |var config = s.AngulateRuntimeSJSXConfig;
 //        |config.decorate = __decorate;
 //      """.stripMargin),
 //    sjsxSnippets <++= ((ngPlattform,ngBootstrap,ngEnableProdMode) map boostrap)
@@ -91,7 +91,7 @@ object Angulate2Plugin extends sbt.AutoPlugin {
             SJSXSnippet(0,
               s"""var s = require('${ngScalaModule.value}');
                  |
-                 |var config = s.angulate2.ext.rt.AngulateRuntimeSJSXConfig;
+                 |var config = s.AngulateRuntimeSJSXConfig;
                  |config.decorate = __decorate;
                """.stripMargin)
           ))
